@@ -1,5 +1,6 @@
 package com.example.kotlintutorial_10_2
 
+import android.Manifest.permission.READ_CONTACTS
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.util.Log
@@ -7,17 +8,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
 private const val TAG = "MainActivity"
+private const val REQUEST_CODE_READ_CONTACTS = 1
 
 class MainActivity : AppCompatActivity() {
+
+    private var readGranted = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        val hasReadContactPermission = ContextCompat.checkSelfPermission(this, READ_CONTACTS)
+        Log.d(TAG, "onCreate: checkSelfPermission returned $hasReadContactPermission")
 
         fab.setOnClickListener { view ->
             Log.d(TAG, "fab OnClick: starts")
