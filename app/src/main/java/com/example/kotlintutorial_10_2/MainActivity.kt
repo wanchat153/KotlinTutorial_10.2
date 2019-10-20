@@ -33,10 +33,15 @@ class MainActivity : AppCompatActivity() {
         val hasReadContactPermission = ContextCompat.checkSelfPermission(this, READ_CONTACTS)
         Log.d(TAG, "onCreate: checkSelfPermission returned $hasReadContactPermission")
 
-        if(hasReadContactPermission == PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "onCreate: permission granted")
-            //readGranted = true
-        } else {
+//        if(hasReadContactPermission == PackageManager.PERMISSION_GRANTED) {
+//            Log.d(TAG, "onCreate: permission granted")
+//            //readGranted = true
+//        } else {
+//            Log.d(TAG, "onCreate: requesting permission")
+//            ActivityCompat.requestPermissions(this, arrayOf(READ_CONTACTS), REQUEST_CODE_READ_CONTACTS)
+//        }
+
+        if(hasReadContactPermission != PackageManager.PERMISSION_GRANTED) {
             Log.d(TAG, "onCreate: requesting permission")
             ActivityCompat.requestPermissions(this, arrayOf(READ_CONTACTS), REQUEST_CODE_READ_CONTACTS)
         }
@@ -88,23 +93,23 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "fab onClick: ends")
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        Log.d(TAG, "onRequestPermissionsResult: starts")
-        when (requestCode) {
-            REQUEST_CODE_READ_CONTACTS -> {
-                //readGranted = if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d(TAG, "onRequestPermissionsResult: permission granted")
-                    true
-                } else {
-                    Log.d(TAG, "onRequestPermissionsResult: permission refused")
-                    //false
-                }
-                //fab.isEnabled = readGranted
-            }
-        }
-        Log.d(TAG, "onRequestPermissionsResult: ends")
-    }
+//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+//        Log.d(TAG, "onRequestPermissionsResult: starts")
+//        when (requestCode) {
+//            REQUEST_CODE_READ_CONTACTS -> {
+//                //readGranted = if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    Log.d(TAG, "onRequestPermissionsResult: permission granted")
+//                    true
+//                } else {
+//                    Log.d(TAG, "onRequestPermissionsResult: permission refused")
+//                    //false
+//                }
+//                //fab.isEnabled = readGranted
+//            }
+//        }
+//        Log.d(TAG, "onRequestPermissionsResult: ends")
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
